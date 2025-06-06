@@ -12,11 +12,15 @@
 <body>
 <div class="container my-5">
     <h1 class="text-center">MVC CRUD APPLICATION</h1>
-    <h3 class="text-center">Using JSP AND Servlet</h3>
+    <h3 class="text-center">Using JSP(JSTL+EL) AND Servlet</h3>
 
     <a href="new" class="btn btn-primary mb-5">
         <i class="fa-solid fa-user-plus m-1"></i>Add Student
     </a>
+
+    <c:if test="${not empty param.success}">
+        <div class="alert alert-success text-center">${param.success}</div>
+    </c:if>
 
     <table class="table table-hover table-striped">
         <thead class="bg-dark text-light">

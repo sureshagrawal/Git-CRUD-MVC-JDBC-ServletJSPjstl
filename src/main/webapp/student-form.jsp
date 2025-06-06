@@ -10,43 +10,52 @@
 </head>
 <body>
 <div class="container my-5">
-    <h1 class="text-center">MVC CRUD APPLICATION</h1>
-    <h3 class="text-center">Using JSP AND Servlet</h3>
+        <h1 class="text-center">MVC CRUD APPLICATION</h1>
+        <h3 class="text-center">Using JSP AND Servlet</h3>
 
-    <c:choose>
-        <c:when test="${not empty student}">
-            <form action="update" method="post">
-                <h2>Edit Student</h2>
+        <c:set var="isEdit" value="${not empty student}" />
+
+        <h2>
+            <c:choose>
+                <c:when test="${isEdit}">Edit Student</c:when>
+                <c:otherwise>Add New Student</c:otherwise>
+            </c:choose>
+        </h2>
+
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger">${error}</div>
+        </c:if>
+
+        <form action="${isEdit ? 'update' : 'insert'}" method="post">
+
+            <c:if test="${isEdit}">
                 <input type="hidden" name="id" value="${student.id}" />
-        </c:when>
-        <c:otherwise>
-            <form action="insert" method="post">
-                <h2>Add New Student</h2>
-        </c:otherwise>
-    </c:choose>
+            </c:if>
 
-        <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" class="form-control" placeholder="Enter your name" name="name"
-                   value="${student.name}" required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="Enter your name" name="name"
+                       value="${student.name}" id="stnameid" required
+                       pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces.">
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="text" class="form-control" placeholder="Enter your Email" name="email"
-                   value="${student.email}" required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Enter your Email" name="email"
+                       value="${student.email}" id="stemailid" required>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Mobile</label>
-            <input type="text" class="form-control" placeholder="Enter your Mobile" name="mobile"
-                   value="${student.mobile}" required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Mobile</label>
+                <input type="text" class="form-control" placeholder="Enter your Mobile" name="mobile"
+                       value="${student.mobile}" id="stmobileid" required
+                       pattern="\d{10}" title="Mobile number should be 10 digits.">
+            </div>
 
-        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-        <button type="reset" class="btn btn-dark">Reset</button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            <button type="reset" class="btn btn-dark">Reset</button>
+        </form>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

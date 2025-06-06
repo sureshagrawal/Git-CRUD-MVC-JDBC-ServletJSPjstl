@@ -51,7 +51,6 @@
     </dependency>
 
 
-
   </dependencies>
   <build>
     <finalName>CRUD_MVC_JDBC_ServletJSPjstl</finalName>

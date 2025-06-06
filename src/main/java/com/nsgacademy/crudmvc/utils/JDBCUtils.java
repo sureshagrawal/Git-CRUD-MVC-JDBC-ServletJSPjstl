@@ -1,8 +1,6 @@
 package com.nsgacademy.crudmvc.utils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class JDBCUtils {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/crud";
