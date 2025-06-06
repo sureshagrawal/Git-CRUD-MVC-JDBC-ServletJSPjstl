@@ -1,4 +1,6 @@
 <%@ page isErrorPage="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,19 +11,17 @@
     <div class="container mt-5 text-center">
         <h1 class="text-danger">Something Went Wrong</h1>
         <p class="lead">
-            <%
-                if (exception != null) {
-                    out.print(exception.getMessage());
-                } else {
-                    String errorMessage = (String) request.getAttribute("errorMessage");
-                    if (errorMessage != null) {
-                        out.print(errorMessage);
-                    } else {
-                        out.print("An internal error occurred. Please try again later or contact support.");
-                    }
-
-                }
-            %>
+            <c:choose>
+                <c:when test="${not empty pageContext.exception}">
+                    ${pageContext.exception.message}
+                </c:when>
+                <c:when test="${not empty errorMessage}">
+                    ${errorMessage}
+                </c:when>
+                <c:otherwise>
+                    An internal error occurred. Please try again later or contact support.
+                </c:otherwise>
+            </c:choose>
         </p>
         <a href="list" class="btn btn-primary">Go Back</a>
     </div>
